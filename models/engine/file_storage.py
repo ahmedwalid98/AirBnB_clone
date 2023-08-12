@@ -19,7 +19,7 @@ class FileStorage:
     Custom class for file storage
     """
 
-    __file_path = '/root/AirBnB_clone/file.json'
+    __file_path = '../AirBnB_clone/file.json'
     __objects = {}
     class_dict = {"BaseModel": BaseModel, "User": User, "Place": Place,
                   "Amenity": Amenity, "City": City, "Review": Review,
