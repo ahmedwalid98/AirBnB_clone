@@ -95,6 +95,10 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = "(hbnb) "
 
+    def emptyline(self):
+        """skip emptyline"""
+        pass
+
     def do_quit(self, arg):
         """Quit from command interpreter."""
         return True
