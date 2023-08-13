@@ -7,21 +7,29 @@ import os
 
 class FileStorage:
 
-    """Class for serializtion and deserialization of base classes."""
+    """Custom class for file storage."""
     __file_path = "file.json"
     __objects = {}
 
     def all(self):
-        """Returns dictionary."""
+        """Returns dictionary representation of all objects."""
         return FileStorage.__objects
 
     def new(self, obj):
-        """Sets new obj in dictionary."""
+        """
+        sets in __objects the object with the key.
+        <object class name>.id
+
+        Args:
+            object(obj): object to write."""
         key = "{}.{}".format(type(obj).__name__, obj.id)
         FileStorage.__objects[key] = obj
 
     def save(self):
-        """Serialzes to JSON file."""
+        """
+        serializes __objects to the JSON file.
+        (path: file_path)
+        """
         with open(FileStorage.__file_path, "w", encoding="utf-8") as f:
             d = {k: v.to_dict() for k, v in FileStorage.__objects.items()}
             json.dump(d, f)
@@ -46,7 +54,7 @@ class FileStorage:
         return classes
 
     def reload(self):
-        """Deserializes JSON file into objects."""
+        """Deserialize/convert obj dicts back to instances, if it exists."""
         if not os.path.isfile(FileStorage.__file_path):
             return
         with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
